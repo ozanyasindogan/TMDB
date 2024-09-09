@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDB.MobileClient", "TMDB.MobileClient\TMDB.MobileClient.csproj", "{62787CE7-5B95-4679-A5B9-C28BE42B1D83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2668BDCF-7FA7-4520-8DE3-F66049C36654}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TMDB.TestConsole", "TMDB.TestConsole\TMDB.TestConsole.csproj", "{26270FC0-5A62-45D0-A050-570B28BC0329}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62787CE7-5B95-4679-A5B9-C28BE42B1D83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62787CE7-5B95-4679-A5B9-C28BE42B1D83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62787CE7-5B95-4679-A5B9-C28BE42B1D83}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{62787CE7-5B95-4679-A5B9-C28BE42B1D83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62787CE7-5B95-4679-A5B9-C28BE42B1D83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62787CE7-5B95-4679-A5B9-C28BE42B1D83}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{26270FC0-5A62-45D0-A050-570B28BC0329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26270FC0-5A62-45D0-A050-570B28BC0329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26270FC0-5A62-45D0-A050-570B28BC0329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26270FC0-5A62-45D0-A050-570B28BC0329}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{26270FC0-5A62-45D0-A050-570B28BC0329} = {2668BDCF-7FA7-4520-8DE3-F66049C36654}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A62265D6-8DBF-4F64-86E0-D1668FF706CA}
+	EndGlobalSection
+EndGlobal

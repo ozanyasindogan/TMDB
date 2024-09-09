@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TMDB.MobileClient.Pages.HomePage"
+             xmlns:vm="clr-namespace:TMDB.MobileClient.ViewModels"
+             xmlns:models="clr-namespace:TMDB.MobileClient.Models"
+             xmlns:animation="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             x:DataType="vm:HomePageViewModel"
+             Title="Upcoming Movies">
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <RefreshView Grid.Row="0" Grid.Column="0" Command="{Binding RefreshDataCommand}" 
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CarouselView ItemsSource="{Binding UpcomingMoviesCollection}"
+                          EmptyView="No items to display."
+                          RemainingItemsThreshold="0"
+                          RemainingItemsThresholdReachedCommand="{Binding FetchMoreDataCommand}"
+                          ItemsUpdatingScrollMode="KeepScrollOffset"
+                          IsScrollAnimated="True"
+                          Loop="False"
+                          CurrentItem="{Binding SelectedMovieItem}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="models:MovieItem">
+                        <Grid>
+                            <Image Source="{Binding PosterPath}" Aspect="AspectFit"/>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+        </RefreshView>
+
+    </Grid>
+</ContentPage>
