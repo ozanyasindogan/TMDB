@@ -72,7 +72,7 @@ public class ApiClientService
         Barrel.Current.AutoExpire = true;
         Barrel.Current.EmptyExpired();
 
-        Barrel.Current.EmptyAll(); // delete this
+        // Barrel.Current.EmptyAll(); // delete this
     }
 
     // https://developer.themoviedb.org/reference/configuration-details
