@@ -67,7 +67,9 @@ public class ApiClientService
         {
             Timeout = TimeSpan.FromSeconds(HttpTimeoutInSeconds)
         };
+        
         _imageClient.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+        
         ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
         {
             HttpClient = _imageClient
@@ -78,7 +80,7 @@ public class ApiClientService
         Barrel.Current.AutoExpire = true;
         Barrel.Current.EmptyExpired();
 
-        // Barrel.Current.EmptyAll(); // delete this
+        // Barrel.Current.EmptyAll(); // this will clear all cached results, for testing purposes only.
     }
 
     // https://developer.themoviedb.org/reference/configuration-details
@@ -109,10 +111,11 @@ public class ApiClientService
     // Get a list of movies that are being released soon.
     // Region: ISO-3166-1 code, default to ca (Canada)
     // --url 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}' \
-    public async Task<UpcomingMovies?> GetUpcomingMoviesAsync(int page = 1, string language = "en-US", string region = "ca")
+    public async Task<UpcomingMovies?> GetUpcomingMoviesAsync(int page = 1, string language = "en-US", string? region = null)
     {
-        //return await GetAsync<UpcomingMovies>($"movie/upcoming?page={page}&language={language}", TimeSpan.FromSeconds(UpcomingMoviesCacheExpiresInSeconds));
-        return await GetAsync<UpcomingMovies>($"movie/upcoming?page={page}&language={language}&region={region}", TimeSpan.FromSeconds(UpcomingMoviesCacheExpiresInSeconds));
+        var regionParam = region is not null ? "&region=" + region : string.Empty;
+        return await GetAsync<UpcomingMovies>($"movie/upcoming?page={page}&language={language}{regionParam}", 
+            TimeSpan.FromSeconds(UpcomingMoviesCacheExpiresInSeconds));
     }
 
     private void ReportException(Exception? exception = null)

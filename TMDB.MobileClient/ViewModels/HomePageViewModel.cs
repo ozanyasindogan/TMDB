@@ -38,12 +38,6 @@ public partial class HomePageViewModel : BaseViewModel, IRecipient<ApiClientErro
 
             _selectedMovieItem = value;
             OnPropertyChanged();
-
-            if (_selectedMovieItem is not null)
-            {
-                Debug.WriteLine($"{_selectedMovieItem.BackdropPath}");
-                Debug.WriteLine($"{_selectedMovieItem.PosterPath}");
-            }
         }
     }
 
@@ -80,6 +74,7 @@ public partial class HomePageViewModel : BaseViewModel, IRecipient<ApiClientErro
         
         IsBusy = true;
 
+        // you may want to change the region here
         var upcomingMovies = await RestApiClient.GetUpcomingMoviesAsync(PageIndex + 1);
 
         if (upcomingMovies is null)
@@ -104,7 +99,7 @@ public partial class HomePageViewModel : BaseViewModel, IRecipient<ApiClientErro
         {
             posterUrl = baseUrl + "w500";       // 500px width for posters
             //backdropUrl = baseUrl + "w1280";    // 1280px width for backdrop
-            backdropUrl = baseUrl + "original";    // 1280px width for backdrop
+            backdropUrl = baseUrl + "original";    // original backdrop image (full size
         }
 
         PageIndex = upcomingMovies.Page;
