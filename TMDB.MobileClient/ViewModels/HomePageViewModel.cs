@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,28 @@ public partial class HomePageViewModel : BaseViewModel, IRecipient<ApiClientErro
     [ObservableProperty]
     private int _lastKnownPage;
 
-    [ObservableProperty] 
     private MovieItem? _selectedMovieItem;
+
+    public MovieItem? SelectedMovieItem
+    {
+        get => _selectedMovieItem;
+        set
+        {
+            if (_selectedMovieItem == value)
+            {
+                return;
+            }
+
+            _selectedMovieItem = value;
+            OnPropertyChanged();
+
+            if (_selectedMovieItem is not null)
+            {
+                Debug.WriteLine($"{_selectedMovieItem.BackdropPath}");
+                Debug.WriteLine($"{_selectedMovieItem.PosterPath}");
+            }
+        }
+    }
 
     [ObservableProperty]
     private bool _isBusy;
@@ -82,7 +103,8 @@ public partial class HomePageViewModel : BaseViewModel, IRecipient<ApiClientErro
         if (baseUrl is not null)
         {
             posterUrl = baseUrl + "w500";       // 500px width for posters
-            backdropUrl = baseUrl + "w1280";    // 1280px width for backdrop
+            //backdropUrl = baseUrl + "w1280";    // 1280px width for backdrop
+            backdropUrl = baseUrl + "original";    // 1280px width for backdrop
         }
 
         PageIndex = upcomingMovies.Page;
@@ -111,6 +133,11 @@ public partial class HomePageViewModel : BaseViewModel, IRecipient<ApiClientErro
             if (result.BackdropPath is not null && backdropUrl is not null )
             {
                 newItem.BackdropPath = backdropUrl + result.BackdropPath;
+            }
+
+            if (string.IsNullOrEmpty(newItem.BackdropPath))
+            {
+                newItem.BackdropPath = newItem.PosterPath;
             }
 
             // map genres

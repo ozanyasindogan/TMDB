@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.Messaging;
+using FFImageLoading;
 using MonkeyCache;
 using MonkeyCache.FileStore;
 using TMDB.MobileClient.Models.Messages;
@@ -66,6 +67,11 @@ public class ApiClientService
         {
             Timeout = TimeSpan.FromSeconds(HttpTimeoutInSeconds)
         };
+        _imageClient.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+        ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration()
+        {
+            HttpClient = _imageClient
+        });
 
         Barrel.ApplicationId = ApplicationId;
         BarrelUtils.SetBaseCachePath(FileSystem.CacheDirectory);
